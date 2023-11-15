@@ -860,6 +860,7 @@ img {
   border-radius: 5px;
   width: 100%;
   transition: all 0.3s ease;
+
 }
 .portfolio-section .portfolio-item-inner:hover .portfolio-item-img img {
   transform: translateY(-25px);
@@ -892,6 +893,9 @@ img {
   margin: 10px 0 0;
   color: var(--text-black-600);
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
