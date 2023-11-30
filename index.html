@@ -26,6 +26,8 @@
   <link class="alternate-style" title="color4" rel="stylesheet" type="text/css" href="CSS/color/color4.css" disabled/>
   <link class="alternate-style" title="color5" rel="stylesheet" type="text/css" href="CSS/color/color5.css" disabled/>
   <link rel="stylesheet" type="text/css" href="CSS/style-switcher.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -953,28 +955,28 @@
       </div>
       <div class="row">
         <div class="contact-form">
-          <form id="inputBook">
+          <form>
             <div class="row">
               <div class="w-50">
                 <div class="input-group outer-shadow hover-in-shadow">
-                  <input id="inputNamaLengkap" type="text" placeholder="Nama Lengkap" class="input-control">
+                  <input id="NamaLengkap" type="text" placeholder="Nama Lengkap" class="input-control" required>
                 </div>
                 <div class="input-group outer-shadow hover-in-shadow">
-                  <input id="inputEmail" type="text" placeholder="Masukkan Email" class="input-control">
+                  <input id="Email" type="email" placeholder="Masukkan Email@gmail.com" class="input-control" required>
                 </div>
                 <div class="input-group outer-shadow hover-in-shadow">
-                  <input id="inputSubject" type="text" placeholder="Subject" class="input-control">
+                  <input id="Phone" type="text" placeholder="Subject" class="input-control" required>
                 </div>
               </div>
               <div class="w-50">
                 <div class="input-group outer-shadow hover-in-shadow"> 
-                  <textarea name="" id="" cols="30" rows="10" class="input-control" placeholder="Pesan"></textarea>
+                  <textarea id="Message" cols="30" rows="10" class="input-control" placeholder="Pesan"></textarea>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="submit-btn">
-                <button type="submit" class="btn-1 outer-shadow hover-in-shadow">Kirim</button>
+                <button class="btn-1 outer-shadow hover-in-shadow" onclick="sendMessage(); reset();">Send</button>
               </div>
             </div>
           </form>
@@ -1056,7 +1058,27 @@
 
   <!-- main js -->
   <script src="JS/script.js"></script>
-  
+  <script>
+    function sendMessage() {
+      (function () {
+        emailjs.init("7VGhcgiZT0YuNbmAg"); // account public key
+      })();
+
+      var serviceID = "service_9e0fnmp"; // email service ID
+      var templateID = "template_76bfejg"; // email template ID
+
+      var params = {
+        sendername: document.getElementById("NamaLengkap").value,
+        senderemail: document.getElementById("Email").value,
+        subject: document.getElementById("Phone").value,
+        message: document.getElementById("Message").value
+      };
+
+      emailjs.send(serviceID, templateID, params).then( res => {
+        alert("Thank you, " + params['sendername'] + '! Your message has been sent.');
+      }).catch();
+    }
+  </script>
   <script src="JS/script-switcher.js"></script>
 </body>
 
